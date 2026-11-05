@@ -1,0 +1,15 @@
+/* Self-hosted fonts (SIL Open Font License, see /fonts). No third-party font requests. */
+@font-face {
+  font-family: 'Fraunces Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url(../fonts/fraunces-latin-full-normal.woff2) format('woff2-variations'), url(../fonts/fraunces-latin-full-normal.woff2) format('woff2');
+}
+@font-face {
+  font-family: 'Figtree Variable';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 300 900;
+  src: url(../fonts/figtree-latin-wght-normal.woff2) format('woff2-variations'), url(../fonts/figtree-latin-wght-normal.woff2) format('woff2');
+}

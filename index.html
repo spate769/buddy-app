@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Buddy – Small group plans in London, Ontario</title>
+<meta name="description" content="Pick an event, and Buddy puts you in a group of 5 or 6 people near you with similar ages and interests. Free, for adults in London, Ontario.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preload" href="fonts/figtree-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<main id="main" class="home">
+  <section class="home-hero" aria-labelledby="hero-title">
+    <div class="container home-hero__inner">
+      <h1 id="hero-title">Make friends in London, five at a time.</h1>
+      <p class="home-hero__sub">Pick something you like doing. We'll put you in a small group of people near you, around your age.</p>
+      <div class="home-hero__cta" id="hero-cta">
+        <a class="btn btn--light btn--lg" href="signup.html">Create your profile</a>
+        <button type="button" class="home-hero__demo" id="demo">Just looking? Try the demo</button>
+      </div>
+      <p class="home-hero__note">Free · 18+ · Groups only, never one-on-one · Always in public places</p>
+    </div>
+    <svg class="home-hero__mark" viewBox="0 0 400 280" aria-hidden="true"><circle cx="90" cy="160" r="70" fill="var(--sky)"/><circle cx="310" cy="160" r="70" fill="var(--apricot)"/><circle cx="200" cy="120" r="80" fill="var(--paper)"/></svg>
+  </section>
+  <section class="container home-steps" aria-label="How it works">
+    <ol>
+      <li><strong>Pick an event</strong><span>Basketball, a movie, a morning walk</span></li>
+      <li><strong>Get your group</strong><span>5 or 6 people, matched by distance, age and interests</span></li>
+      <li><strong>Make the plan</strong><span>A group chat opens right away</span></li>
+    </ol>
+  </section>
+</main>
+
+<!-- Netlify Forms: these hidden forms register the fields Netlify collects.
+     The site sends to them with JavaScript (see js/store.js → sendToTeam). -->
+<div hidden>
+  <form name="signup" data-netlify="true" netlify-honeypot="bot-field"><input name="bot-field"><input name="name"><input name="email"><input name="age"><input name="gender"><input name="life_stage"><input name="area"><input name="interests"><input name="social_link"><input name="has_photo"></form>
+  <form name="join" data-netlify="true" netlify-honeypot="bot-field"><input name="bot-field"><input name="email"><input name="event"><input name="group_size"><input name="women_only"><input name="preferences"><input name="matched_with"></form>
+  <form name="post-event" data-netlify="true" netlify-honeypot="bot-field"><input name="bot-field"><input name="email"><input name="title"><input name="category"><input name="place"><input name="start"><input name="group_size"><input name="women_only"><textarea name="description"></textarea></form>
+  <form name="survey" data-netlify="true" netlify-honeypot="bot-field"><input name="bot-field"><input name="email"><input name="event"><input name="rating"><input name="meet_again"><input name="group_fit"><input name="felt_safe"><textarea name="comments"></textarea></form>
+  <form name="report" data-netlify="true" netlify-honeypot="bot-field"><input name="bot-field"><input name="email"><input name="context"><input name="context_name"><input name="about"><input name="reason"><textarea name="details"></textarea><input name="blocked"></form>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/store.js"></script>
+<script src="js/match.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/pages/landing.js"></script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+/* ==========================================================
+   Buddy design tokens · v3.0
+   Light is default. Dark applies via OS preference unless
+   the page sets data-theme="light"; data-theme="dark" forces dark.
+   ========================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* ---- Color: surfaces ---- */
+  --paper: #FBF8F3;
+  --card: #FFFDF9;
+  --mist: #E9EFF7;
+  --sand: #E7E1D8;          /* decorative lines only */
+  --stone: #857E75;         /* control boundaries (3:1+) */
+
+  /* ---- Color: text ---- */
+  --ink: #16243A;
+  --driftwood: #6B6660;
+
+  /* ---- Color: brand ---- */
+  --harbor: #2456A6;
+  --harbor-deep: #1A4280;
+  --on-harbor: #FFFFFF;
+  --sky: #A9C2E4;
+
+  /* ---- Color: accent ---- */
+  --apricot: #E8835A;       /* decorative only, never text/indicators */
+  --apricot-tint: #F6E7DF;
+  --clay: #B4512B;
+  --on-clay: #FFFFFF;
+
+  /* ---- Color: status ---- */
+  --moss: #2F7D5B;
+  --moss-tint: #E3F1EA;
+  --brick: #B3402F;
+  --brick-tint: #F8E4E0;
+  --on-danger: #FFFFFF;
+
+  /* ---- Overlays & shadows ---- */
+  --backdrop: rgb(16 26 42 / 0.5);
+  --shadow-1: 0 1px 2px rgb(22 36 58 / 0.06);
+  --shadow-2: 0 2px 4px rgb(22 36 58 / 0.06), 0 8px 24px rgb(22 36 58 / 0.08);
+  --shadow-3: 0 4px 8px rgb(22 36 58 / 0.08), 0 24px 48px rgb(22 36 58 / 0.14);
+
+  /* ---- Typography ---- */
+  --font-display: 'Fraunces Variable', 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-body: 'Figtree Variable', 'Figtree', ui-sans-serif, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+
+  --text-display: clamp(2.5rem, 1.8rem + 3.2vw, 4rem);
+  --text-h1: clamp(2.125rem, 1.6rem + 2.2vw, 3.25rem);
+  --text-h2: clamp(1.625rem, 1.4rem + 1vw, 2.125rem);
+  --text-h3: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --text-h4: 1.125rem;
+  --text-long: 1.25rem;
+  --text-body: 1.125rem;
+  --text-input: 1.0625rem;
+  --text-ui: 1rem;
+  --text-meta: 0.9375rem;
+  --text-min: 0.875rem;
+
+  --leading-tight: 1.12;
+  --leading-heading: 1.2;
+  --leading-body: 1.5;
+  --leading-long: 1.6;
+
+  --measure: 60ch;
+
+  /* ---- Spacing ---- */
+  --space-1: 0.25rem;  /*   4px */
+  --space-2: 0.5rem;   /*   8px */
+  --space-3: 0.75rem;  /*  12px */
+  --space-4: 1rem;     /*  16px */
+  --space-5: 1.5rem;   /*  24px */
+  --space-6: 2rem;     /*  32px */
+  --space-7: 3rem;     /*  48px */
+  --space-8: 4rem;     /*  64px */
+  --space-9: 6rem;     /*  96px */
+  --space-10: 8rem;    /* 128px */
+
+  /* ---- Shape ---- */
+  --radius-input: 8px;
+  --radius-button: 10px;
+  --radius-menu: 12px;
+  --radius-card: 14px;
+  --radius-bubble: 16px;
+  --radius-sheet: 20px;
+  --radius-pill: 999px;
+
+  --border-hair: 1px solid var(--sand);
+  --border-control: 1.5px solid var(--stone);
+
+  /* ---- Sizing ---- */
+  --control-h-lg: 52px;
+  --control-h: 44px;
+  --control-h-sm: 36px;
+  --input-h: 48px;
+  --header-h: 56px;
+  --tabbar-h: 64px;
+
+  --avatar-xs: 24px;
+  --avatar-sm: 32px;
+  --avatar-md: 40px;
+  --avatar-lg: 56px;
+  --avatar-xl: 96px;
+  --avatar-2xl: 128px;
+
+  --container: 1200px;
+  --container-narrow: 760px;
+
+  /* ---- Layers ---- */
+  --z-base: 0;
+  --z-sticky: 100;
+  --z-dropdown: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+
+  /* ---- Motion ---- */
+  --dur-fast: 120ms;
+  --dur-base: 180ms;
+  --dur-slow: 240ms;
+  --ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 768px) {
+  :root { --header-h: 64px; }
+}
+
+/* Dark: follow OS unless the page forces light */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --paper: #101A2A;
+    --card: #17243A;
+    --mist: #1E3050;
+    --sand: #2A3A55;
+    --stone: #6A7B97;
+    --ink: #EEE9E1;
+    --driftwood: #A8A39B;
+    --harbor: #7FA7E0;
+    --harbor-deep: #A3C0EA;
+    --on-harbor: #101A2A;
+    --sky: #3D5A85;
+    --apricot: #F0A07E;
+    --apricot-tint: #3A2A22;
+    --clay: #F0A07E;
+    --on-clay: #101A2A;
+    --moss: #6FC29B;
+    --moss-tint: #1F3A30;
+    --brick: #F08A7A;
+    --brick-tint: #3A2226;
+    --on-danger: #101A2A;
+    --backdrop: rgb(0 0 0 / 0.6);
+    --shadow-1: none;
+    --shadow-2: 0 8px 24px rgb(0 0 0 / 0.35);
+    --shadow-3: 0 24px 48px rgb(0 0 0 / 0.45);
+  }
+}
+
+/* Dark: forced by the page */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #101A2A;
+  --card: #17243A;
+  --mist: #1E3050;
+  --sand: #2A3A55;
+  --stone: #6A7B97;
+  --ink: #EEE9E1;
+  --driftwood: #A8A39B;
+  --harbor: #7FA7E0;
+  --harbor-deep: #A3C0EA;
+  --on-harbor: #101A2A;
+  --sky: #3D5A85;
+  --apricot: #F0A07E;
+  --apricot-tint: #3A2A22;
+  --clay: #F0A07E;
+  --on-clay: #101A2A;
+  --moss: #6FC29B;
+  --moss-tint: #1F3A30;
+  --brick: #F08A7A;
+  --brick-tint: #3A2226;
+  --on-danger: #101A2A;
+  --backdrop: rgb(0 0 0 / 0.6);
+  --shadow-1: none;
+  --shadow-2: 0 8px 24px rgb(0 0 0 / 0.35);
+  --shadow-3: 0 24px 48px rgb(0 0 0 / 0.45);
+}
