@@ -16,14 +16,19 @@
 <main id="main" class="container page">
   <div class="page-head">
     <div>
-      <h1>Events near you</h1>
-      <p>Every event is for groups of 5 or 6. Join one and we'll place you with people who fit.</p>
+      <h1>Events Near You</h1>
+      <p>Every event is for groups of 5 or 6. The best fits for you come first.</p>
     </div>
     <a class="btn btn--secondary mobile-only" href="post.html" id="post-btn">Post an event</a>
   </div>
   <div id="signin-note"></div>
   <div class="filters" role="search" aria-label="Filter events">
-    <div class="chip-scroll" id="cats" aria-label="Activity"></div>
+    <div class="search">
+        <label class="visually-hidden" for="q">Search events</label>
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></svg>
+        <input class="input" id="q" type="search" placeholder="Search events, places or activities" autocomplete="off">
+      </div>
+      <div class="chip-row" id="cats" role="group" aria-label="Event types"></div>
     <div class="filters__row">
       <div class="field">
         <label class="field__label" for="when">When</label>

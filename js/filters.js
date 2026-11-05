@@ -8,11 +8,13 @@
   function setup(onChange) {
     const u = Store.user();
     const saved = load();
-    const f = { cats: new Set(saved.cats || []), when: saved.when || 'any', dist: saved.dist || 'any', sort: saved.sort || (u ? 'fit' : 'soon'), women: !!saved.women };
+    const f = { q: saved.q || '', cats: new Set(saved.cats || []), when: saved.when || 'any', dist: saved.dist || 'any', sort: saved.sort || (u ? 'fit' : 'soon'), women: !!saved.women };
 
     const catHost = $('#cats');
     chips(catHost, Store.categories().map((c) => [c.id, c.name]), f.cats, { onChange: () => { save(f); onChange(); } });
 
+    const q = $('#q'); q.value = f.q;
+    let qt; q.addEventListener('input', () => { clearTimeout(qt); qt = setTimeout(() => { f.q = q.value.trim(); save(f); onChange(); }, 150); });
     const when = $('#when'), dist = $('#dist'), sort = $('#sort'), women = $('#women');
     when.value = f.when; dist.value = f.dist; women.setAttribute('aria-pressed', f.women);
     if (!u) {
@@ -26,7 +28,7 @@
     women.onclick = () => { f.women = !f.women; women.setAttribute('aria-pressed', f.women); save(f); onChange(); };
 
     f.clear = () => {
-      f.cats.clear(); f.when = 'any'; f.dist = 'any'; f.women = false;
+      f.cats.clear(); f.q = ''; q.value = ''; f.when = 'any'; f.dist = 'any'; f.women = false;
       when.value = 'any'; dist.value = 'any'; women.setAttribute('aria-pressed', 'false');
       [...catHost.children].forEach((b) => b.setAttribute('aria-pressed', 'false'));
       save(f); onChange();
@@ -50,6 +52,14 @@
       const km = u ? BuddyMatch.km(BuddyMatch.area(u.area), place) : 0;
       return { ev, score, km };
     });
+    if (f.q) {
+      const words = f.q.toLowerCase().split(/\s+/).filter(Boolean);
+      list = list.filter((x) => {
+        const p = Store.place(x.ev.place) || {};
+        const hay = [x.ev.title, x.ev.desc, Store.catName(x.ev.cat), p.name, p.area, x.ev.womenOnly ? 'women only' : ''].join(' ').toLowerCase();
+        return words.every((w) => hay.includes(w));
+      });
+    }
     if (f.cats.size) list = list.filter((x) => f.cats.has(x.ev.cat));
     if (f.women) list = list.filter((x) => x.ev.womenOnly);
     if (f.when === 'week') list = list.filter((x) => x.ev.startDate <= weekEnd);

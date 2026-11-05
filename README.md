@@ -1,90 +1,109 @@
 # Buddy
 
-Buddy puts adults in London, Ontario into small groups of 5 or 6 for things they already like doing: pickup basketball, a movie, a morning walk. You pick an event, the matching algorithm places you with people near you who are close in age and share your interests, and a group chat opens so the group can plan. After the meetup, a 5-question survey asks how it went.
+**Make friends doing what you love.**
 
-Business 4558 prototype · Andrew, Carina, Mert, Sheel, Pruthvish
+Buddy matches adults into small groups of 5 or 6 for things they already enjoy: pickup basketball, a movie, a morning walk. Pick an event, and the matching algorithm places you with people near you who are close in age and share your interests. A group chat opens so the group can make the plan. After the meetup, a 5-question check-in asks how it went.
 
-## How to try it (2 minutes)
+Business 4558 · Checkpoint 2 prototype · Team: Andrew, Carina, Mert, Sheel, Pruthvish
 
-1. Open the site (see "Previewing" below) and click **"Just looking? Try the demo"** on the home page. You can also click **"Use the demo profile"** on the sign-up or log-in page.
-2. You land on **My groups** with one group already made for "Board games at the library".
-3. Click the group to open the **group chat**. Send a message, tap **I'm going**, and try **People** and **Report**.
-4. In the chat, click **Rate this meetup** to see the **5-question survey**.
-5. Go to **Events** or **Map**, open any event and click **Join a group** to watch the matching form a new group.
-6. Click **You** (top right) to edit the profile or log out. To start over as a new person, log out and click **Create your profile**.
+**Live site:** https://buddy-app.sheel1911.workers.dev
 
-Pages that need an account (groups, chat, survey, profile, post) send you to log in first. That's why a preview may open on the log-in page. Use the demo button there.
+---
 
-## Previewing
+## Try it in 2 minutes
 
-- **Quickest:** double-click `index.html`. Headings may show in a fallback font this way.
-- **Like the real site:** in Terminal, run `cd ~/Documents/buddy-app && python3 -m http.server 8000`, then open http://localhost:8000.
-- **Shareable link:** drag the `buddy-app` folder onto https://app.netlify.com/drop.
+1. Open the live site and click **Try the demo**.
+2. You land on **My Groups** with a board games group already made. Open it to see the **group chat**.
+3. In the chat: send a message, tap **I'm going**, then try **People** and **Report**.
+4. Click **Rate this meetup** to see the **5-question survey**.
+5. Go to **Events**: search, filter by type, open an event and click **Join a Group** to watch the matching.
+6. Check **Map**, **Post an event**, **Safety** and **You** (profile).
 
-## The five steps
+To sign up as a new person instead, click **You → Log out**, then **Join Buddy**. Sign-up asks for a profile photo, at least 3 interests, your area and your age.
 
-| Step | Page | What happens |
+> **Prototype note:** the people and events are examples. Accounts, groups and chats are saved only in your own browser, so two people can't see each other yet. Pages that need an account (groups, chat, survey, profile, post) send you to log in first. Use the demo button there.
+
+## Pages
+
+| Page | File | What it does |
 |---|---|---|
-| 1. Sign up / log in | `signup.html`, `login.html` | Account, then name plus a photo **or** social link (required, so people can put a face to a name), 3+ interests, area, age, life stage, optional gender |
-| 2. Find an event | `events.html`, `map.html` | List or map of group events (never one-on-one). Filter by activity, day, distance, women-only. Sorted by fit |
-| 3. Join a group | `event.html?id=…` | Shows why the event fits you. Choose group size (5 or 6), similar interests, similar age, same life stage, women-only. The algorithm forms your group |
-| 4. Group chat | `chat.html?g=…`, `groups.html` | The plan, the people, "I'm going", messages, Report and Block |
-| 5. Follow-up | `survey.html?g=…` | Rating, would you meet again, group fit, felt safe, comments. "Not safe" offers a private report |
+| Home | `index.html` | Mission, how it works, Join Buddy, Try the demo |
+| Sign up | `signup.html` | 4 steps: account → photo (required, social link optional) → interests → area, age, life stage, gender (optional) |
+| Log in | `login.html` | Email and password, or the demo profile |
+| Events | `events.html` | Search, event types, day, distance, women-only. Sorted by best fit |
+| Map | `map.html` | Same events as pins on a map |
+| Event | `event.html?id=…` | Details, why it fits you, group preferences, **Join a Group** |
+| Post an event | `post.html` | Anyone can post an event at a public place |
+| My Groups | `groups.html` | Every group you're in |
+| Group chat | `chat.html?g=…` | The plan, people, messages, Report and Block |
+| Survey | `survey.html?g=…` | Rating, meet again, group fit, felt safe, comments |
+| Profile | `profile.html` | Edit profile, blocked people, log out, delete |
+| Safety | `safety.html` | Commitments, emergencies, tips, reporting, guidelines, privacy |
 
-Also: `post.html` (anyone can post an event at a public place), `profile.html` (edit, blocked people, log out, delete), `safety.html` (safety tips, guidelines, privacy).
+## How matching works
 
-**Demo profile:** the "Use the demo profile" button on the sign-up and log-in pages skips sign-up. That's the fastest way for the professor to try it.
+Events and groups are sorted by four factors:
 
-## Deploying on Netlify
-
-1. Push this folder to the GitHub repo (`spate769/buddy-app`). The files go at the top level of the repo, with `index.html` in the root.
-2. On app.netlify.com: **Add new site → Import an existing project → GitHub →** pick `buddy-app`.
-3. Leave the build command empty. The publish directory is `.` (already set in `netlify.toml`). Click **Deploy**.
-4. Go to **Site configuration → Forms** and turn on **form detection**, then redeploy once.
-5. Every push to `main` now updates the live site. Pull requests get their own preview link.
-
-### Where the data goes
-
-| Data | Where it lives now |
+| Factor | Weight |
 |---|---|
-| Profiles, groups, chat messages, blocks | The visitor's own browser (`localStorage`). Not shared between people or devices yet |
-| Sign-ups, joins, posted events, survey answers, reports | **Also** sent to Netlify Forms. The team sees them in Netlify → Forms and can export CSV |
+| Distance (area to area, never home addresses) | 35% |
+| Age | 30% |
+| Interests | 20% |
+| Life stage (student, working, new to the city, parent, kids have left home, retired) | 15% |
 
-Passwords and photos are **never** sent to Netlify Forms. Government ID is never collected.
+Women-only events and groups include only women. Full details and a Python version are in [`docs/matching-algorithm.md`](docs/matching-algorithm.md). The code is in `js/match.js`.
 
-## Connecting a backend (for Pruthvish)
+## Hosting (Cloudflare)
 
-All reading and writing goes through one file: **`js/store.js`**. Pages never touch storage directly. To move to a real database, replace the bodies of the `Store` functions with API calls and keep the same names and return shapes:
+The site is plain HTML, CSS and JavaScript with no build step. It's hosted on Cloudflare and **redeploys automatically on every push to `main`**.
+
+- `wrangler.jsonc`: Cloudflare settings (serves the folder, uses `404.html` for missing pages)
+- `_headers`: security headers (only this site's own code can run; images only from this site, Unsplash and the map tiles)
+- `.assetsignore`: keeps `README.md`, `docs/` and settings files off the public website
+
+To set up hosting from scratch: Cloudflare dashboard → your account → **Workers & Pages → Create → Import a repository →** choose this repo. Leave the build command empty. Cloudflare reads `wrangler.jsonc`.
+
+## Working on the code
+
+**Preview locally:** `python3 -m http.server 8000` in this folder, then open http://localhost:8000.
+
+**Make a change:** edit, commit and push to `main`. The live site updates in about a minute.
+
+```
+css/        tokens.css (colours, type, spacing), base.css + components.css (from the design guide), fonts.css, app.css
+js/         data.js (sample people, events, places), store.js (all saving and loading), match.js (algorithm), ui.js (shared pieces), filters.js
+js/pages/   one script per page
+fonts/      Bricolage Grotesque and Figtree, self-hosted (SIL Open Font License)
+vendor/     Leaflet 1.9.4 for the map
+docs/       design guide, UX spec, matching algorithm
+```
+
+**Design rules** are in `docs/design-guide.md`. Use the colour and spacing tokens in `css/tokens.css`. Don't add new colours.
+
+**Photos** on the home page are free Unsplash photos linked by URL. To use your own, put them in an `img/` folder and change the `src` in `index.html`. If a photo fails to load, the brand circles show instead.
+
+## Connecting a backend (next step)
+
+All saving and loading goes through **`js/store.js`**. Pages never touch storage directly. To move to a real database, replace the bodies of the `Store` functions with API calls and keep the same names and return shapes:
 
 - Accounts: `signUp`, `logIn`, `logOut`, `user`, `updateProfile`, `finishProfile`, `deleteAccount`
 - Events: `events`, `event`, `attendees`, `addEvent`
 - Groups and chat: `createGroup`, `groups`, `group`, `groupForEvent`, `leaveGroup`, `messages`, `addMessage`, `going`, `setGoing`
 - Survey and safety: `saveSurvey`, `survey`, `report`, `block`, `unblock`, `blocked`
+- `sendToTeam(name, data)` is called for sign-ups, joins, posted events, surveys and reports. It does nothing yet. Point it at the backend to collect them.
 
-Group chat would need a live connection (WebSocket or polling) once messages are shared between people.
+Group chat will need a live connection (WebSocket or polling) once messages are shared between people.
 
-The matching algorithm is in **`js/match.js`**, with no dependencies. A plain-language spec and a Python version are in **`docs/matching-algorithm.md`**.
+## Privacy and safety in the prototype
 
-## Files
+- Nothing leaves the visitor's browser yet. No analytics, no trackers, no third-party scripts.
+- Passwords are stored hashed. No government ID is collected.
+- Meetups are always at public places. Reports are private, and blocking removes someone from your groups.
 
-```
-index.html  signup.html  login.html  events.html  map.html  event.html
-post.html   groups.html  chat.html   survey.html  profile.html  safety.html  404.html
-css/        tokens.css (design tokens), base.css + components.css (from the design guide), fonts.css, app.css
-js/         data.js (sample people/events), store.js (data layer), match.js (algorithm), ui.js (shared UI), filters.js
-js/pages/   one script per page
-fonts/      Fraunces and Figtree, self-hosted (SIL Open Font License)
-vendor/     Leaflet 1.9.4 for the map (BSD-2)
-docs/       design-guide.md, ux-design-spec.md, matching-algorithm.md
-netlify.toml   publish settings and security headers
-```
+## Planned next
 
-Everything is self-hosted except the map tiles (CARTO, built on OpenStreetMap data). No other third-party scripts, fonts or trackers.
-
-## Sample data
-
-All people and events in `js/data.js` are **examples**, labelled as such on the site. Venues are real public places in London. Replace them with real data before launch.
-
-## Running locally
-
-Open the folder in a terminal and run `python3 -m http.server`, then visit http://localhost:8000. Netlify Forms only works on the deployed site.
+- Real accounts and shared data (backend)
+- Algorithm-based filters
+- An embedded map from Google Maps or similar
+- Real member photos with moderation
+- A new logo

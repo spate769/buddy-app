@@ -27,7 +27,7 @@
     </div>
     <div>
       <section class="card plan" aria-labelledby="plan-title">
-        <h2 id="plan-title">The plan</h2>
+        <h2 id="plan-title">The Plan</h2>
         <ul class="facts">
           <li>${icon('calendar')}<div><strong>${esc(fmtLong(start))}</strong><span class="meta">${fmtTime(start)}</span></div></li>
           <li>${icon('pin')}<div><strong>${esc(place ? place.name : '')}</strong><span class="meta">${esc(place ? place.area : '')} · public place</span></div></li>
@@ -97,7 +97,7 @@
 
   $('#people').onclick = () => {
     const ms = members();
-    const d = dialog(`<h2 id="dlg-title">People in this group</h2>
+    const d = dialog(`<h2 id="dlg-title">People in This Group</h2>
       <ul class="member-list">
         <li class="you">${avatar(u, 40)}<div><strong>${esc(u.name)} (you)</strong></div></li>
         ${ms.map((p) => `<li><button type="button" data-person="${esc(p.id)}">${avatar(p, 40)}<div><strong>${esc(p.name)}</strong><p class="meta">${esc(Store.areaName(p.area))} · ${esc(p.stage)}</p></div></button></li>`).join('')}
@@ -107,7 +107,7 @@
     d.querySelectorAll('[data-person]').forEach((b) => b.onclick = () => { d.close(); openPerson(Store.person(b.dataset.person), { onChange: refresh }); });
     d.querySelector('[data-leave]').onclick = () => {
       d.close();
-      const c = dialog(`<h2 id="dlg-title">Leave this group?</h2><p>You'll leave this chat. You can join the event again and be placed in a new group.</p><div class="dialog__actions"><button type="button" class="btn btn--secondary" data-cancel>Cancel</button><button type="button" class="btn btn--danger" data-ok>Leave group</button></div>`);
+      const c = dialog(`<h2 id="dlg-title">Leave This Group?</h2><p>You'll leave this chat. You can join the event again and be placed in a new group.</p><div class="dialog__actions"><button type="button" class="btn btn--secondary" data-cancel>Cancel</button><button type="button" class="btn btn--danger" data-ok>Leave group</button></div>`);
       c.querySelector('[data-cancel]').onclick = () => c.close();
       c.querySelector('[data-ok]').onclick = () => { Store.leaveGroup(g.id); UI.flash('You left the group.'); location.href = 'groups.html'; };
     };

@@ -2,7 +2,7 @@
   const { renderChrome, eventCard, icon, $ } = UI;
   renderChrome('events');
   const u = Store.user();
-  const PAGE = 12;
+  const PAGE = 6; // two rows on desktop
   let shown = PAGE;
 
   if (!u) {

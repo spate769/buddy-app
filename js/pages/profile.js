@@ -22,7 +22,7 @@
       </div>
       <div class="profile-grid">
         <section class="card" aria-labelledby="private-title">
-          <h2 id="private-title">Only you can see these</h2>
+          <h2 id="private-title">Only You Can See These</h2>
           <dl class="kv">
             <dt>Email</dt><dd>${esc(u.email)}</dd>
             <dt>Age</dt><dd>${esc(u.age)} <span class="meta">(used to group you with people around your age)</span></dd>
@@ -32,7 +32,7 @@
         <section class="card" id="safety" aria-labelledby="safety-title">
           <h2 id="safety-title">Safety</h2>
           <p>Report or block someone from any group chat. Reports are private and reviewed within 24 hours.</p>
-          <h4>Blocked people</h4>
+          <h4>Blocked People</h4>
           ${blocked.length ? `<ul class="member-list">${blocked.map((p) => `<li class="you">${avatar(p, 32)}<span style="flex:1">${esc(p.name)}</span><button type="button" class="btn btn--tertiary btn--sm" data-unblock="${esc(p.id)}">Unblock</button></li>`).join('')}</ul>` : '<p class="meta">You haven\'t blocked anyone.</p>'}
           <p><a href="safety.html">Read our safety guide</a></p>
         </section>
@@ -47,7 +47,7 @@
     $('#edit').onclick = edit;
     $('#logout').onclick = () => { Store.logOut(); flash('You logged out.'); location.href = 'index.html'; };
     $('#delete').onclick = () => {
-      const d = dialog(`<h2 id="dlg-title">Delete your profile?</h2><p>Your profile, groups and messages are removed from this device right away. This can't be undone.</p><div class="dialog__actions"><button type="button" class="btn btn--secondary" data-cancel>Cancel</button><button type="button" class="btn btn--danger" data-ok>Delete my profile</button></div>`);
+      const d = dialog(`<h2 id="dlg-title">Delete Your Profile?</h2><p>Your profile, groups and messages are removed from this device right away. This can't be undone.</p><div class="dialog__actions"><button type="button" class="btn btn--secondary" data-cancel>Cancel</button><button type="button" class="btn btn--danger" data-ok>Delete my profile</button></div>`);
       d.querySelector('[data-cancel]').onclick = () => d.close();
       d.querySelector('[data-ok]').onclick = () => { Store.deleteAccount(); flash('Your profile was deleted.'); location.href = 'index.html'; };
     };
@@ -62,11 +62,11 @@
     const opt = (v, l, sel) => `<option value="${esc(v)}"${sel === v ? ' selected' : ''}>${esc(l)}</option>`;
     host.innerHTML = `
       <div class="container-narrow" style="padding:0;margin:0">
-        <h1>Edit profile</h1>
+        <h1>Edit Profile</h1>
         <div id="errs" class="banner banner--error error-summary" role="alert" tabindex="-1" hidden></div>
         <form id="f" novalidate>
           <div class="field"><label class="field__label" for="name">First name</label><input class="input" id="name" autocomplete="given-name" value="${esc(u.name)}"></div>
-          <fieldset class="identity"><legend class="field__label">Your photo or social link</legend>
+          <fieldset class="identity"><legend class="field__label">Profile photo</legend>
             <div class="photo-pick">
               <span id="photo-preview">${avatar({ name: u.name, photo }, 96)}</span>
               <div class="stack-sm">
@@ -75,8 +75,7 @@
                 <button type="button" class="btn btn--tertiary btn--sm" id="photo-remove"${photo ? '' : ' hidden'}>Remove photo</button>
               </div>
             </div>
-            <div class="or">or</div>
-            <div class="field" style="margin:0"><label class="field__label" for="social">Social link</label><input class="input" id="social" type="url" inputmode="url" value="${esc(u.social || '')}" placeholder="e.g. instagram.com/yourname"></div>
+            <div class="field" style="margin:var(--space-5) 0 0"><label class="field__label" for="social">Social link (optional)</label><input class="input" id="social" type="url" inputmode="url" value="${esc(u.social || '')}" placeholder="e.g. instagram.com/yourname"></div>
           </fieldset>
           <fieldset class="field" style="border:0;padding:0"><legend class="field__label" style="margin-bottom:var(--space-2)">Interests (at least 3)</legend><div class="chip-row" id="interests"></div></fieldset>
           <div class="field"><label class="field__label" for="area">Area</label><select class="select" id="area">${Store.areas().map((a) => opt(a.id, a.name, u.area)).join('')}</select></div>
@@ -100,7 +99,7 @@
       if (social && !/^https?:\/\//i.test(social)) social = 'https://' + social;
       const errs = [];
       if (!name) errs.push(['name', 'Enter your first name']);
-      if (!photo && !social) errs.push(['photo', 'Keep a photo or a social link so your group knows who they are meeting']);
+      if (!photo && !u.demo) errs.push(['photo', 'Add a photo of your face so your group can recognize you']);
       if (picked.size < 3) errs.push(['interests', 'Pick at least 3 interests']);
       if (!age || age < 18 || age > 100) errs.push(['age', 'Enter an age of 18 or older']);
       const box = $('#errs');

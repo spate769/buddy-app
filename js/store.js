@@ -1,9 +1,7 @@
 /* ==========================================================
    Buddy · data layer
    EVERY read and write in the site goes through this file.
-   Right now it saves to the visitor's browser (localStorage) and
-   sends a copy of sign-ups, joins, posts, surveys and reports to
-   Netlify Forms so the team can see them.
+   Right now everything is saved in the visitor's browser (localStorage).
 
    To connect a real backend later, replace the bodies of these
    functions with API calls. Pages don't need to change.
@@ -39,13 +37,10 @@
     }
   }
 
-  /* ---------- Netlify Forms (team dashboard) ---------- */
-  function sendToTeam(formName, data) {
-    if (!/^https?:$/.test(location.protocol)) return Promise.resolve();
-    const body = new URLSearchParams({ 'form-name': formName });
-    Object.entries(data).forEach(([k, v]) => body.append(k, Array.isArray(v) ? v.join(', ') : v == null ? '' : String(v)));
-    return fetch('/', { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: body.toString() }).catch(() => {});
-  }
+  /* ---------- Sending data to the team ----------
+     For now nothing leaves the visitor's browser. When the backend is ready,
+     send these records to it here (sign-ups, joins, posted events, surveys, reports). */
+  function sendToTeam(formName, data) { return Promise.resolve({ formName, data }); }
 
   /* ---------- Dates ---------- */
   function startOf(ev) {

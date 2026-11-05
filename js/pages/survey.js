@@ -13,7 +13,7 @@
   const radios = (name, opts) => `<div class="scale">${opts.map(([v, l, s]) => `<label><input type="radio" name="${name}" value="${esc(v)}"><span>${esc(l)}${s ? `<small>${esc(s)}</small>` : ''}</span></label>`).join('')}</div>`;
   host.innerHTML = `
     <p class="meta"><a href="chat.html?g=${encodeURIComponent(g.id)}">${esc(g.eventTitle)}</a> · ${esc(fmtDay(new Date(g.eventStart)))}</p>
-    <h1>How did it go?</h1>
+    <h1>How Did It Go?</h1>
     <p class="lede">Five quick questions. Your answers are private and help us make better groups.</p>
     <div id="errs" class="banner banner--error error-summary" role="alert" tabindex="-1" hidden></div>
     <form class="survey" id="f" novalidate>

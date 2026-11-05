@@ -92,11 +92,12 @@
 
   function renderChrome(active) {
     const u = S.user();
-    const home = u ? 'events.html' : 'index.html';
+    const home = 'index.html';
     const nav = [
       ['events', 'Events', 'events.html', 'list'],
       ['map', 'Map', 'map.html', 'map'],
-      ['groups', 'My groups', 'groups.html', 'chat'],
+      ['groups', 'My Groups', 'groups.html', 'chat'],
+      ['safety', 'Safety', 'safety.html', 'shield'],
       ['you', 'You', 'profile.html', 'user']
     ];
     const header = document.createElement('div');
@@ -106,7 +107,7 @@
         <div class="container topbar__inner">
           <a class="logo" href="${home}" aria-label="Buddy home">${LOGO}</a>
           ${u ? `<nav class="topnav" aria-label="Main">
-              ${nav.slice(0, 3).map(([k, l, h, i]) => `<a href="${h}" class="topnav__link"${k === active ? ' aria-current="page"' : ''}>${icon(i)}<span>${l}</span></a>`).join('')}
+              ${nav.slice(0, 4).map(([k, l, h, i]) => `<a href="${h}" class="topnav__link"${k === active ? ' aria-current="page"' : ''}>${icon(i)}<span>${l}</span></a>`).join('')}
             </nav>
             <div class="topbar__actions">
               <a class="btn btn--secondary btn--sm topbar__post" href="post.html">${icon('plus')}Post an event</a>
@@ -115,10 +116,11 @@
           : `<nav class="topnav topnav--public" aria-label="Main">
               <a href="events.html" class="topnav__link"${active === 'events' ? ' aria-current="page"' : ''}>${icon('list')}<span>Events</span></a>
               <a href="map.html" class="topnav__link"${active === 'map' ? ' aria-current="page"' : ''}>${icon('map')}<span>Map</span></a>
+              <a href="safety.html" class="topnav__link"${active === 'safety' ? ' aria-current="page"' : ''}>${icon('shield')}<span>Safety</span></a>
             </nav>
             <div class="topbar__actions">
               <a class="btn btn--tertiary" href="login.html">Log in</a>
-              <a class="btn btn--primary btn--sm" href="signup.html">Create your profile</a>
+              <a class="btn btn--primary" href="signup.html">Join Buddy</a>
             </div>`}
         </div>
       </header>`;
@@ -142,9 +144,14 @@
         <li><a href="safety.html#privacy">Privacy</a></li>
         <li><a href="safety.html#contact">Contact</a></li>
       </ul></nav>
-      <p class="meta">London, Ontario. Prototype for Business 4558. People and events shown are examples.</p>
+      <p class="meta">A Business 4558 prototype. People and events shown are examples.</p>
     </div>`;
     document.body.appendChild(f);
+    // If a stock photo can't load, hide it and show the brand shapes behind it.
+    document.querySelectorAll('img[data-fallback]').forEach((img) => {
+      const fail = () => { img.hidden = true; };
+      if (img.complete && img.naturalWidth === 0) fail(); else img.addEventListener('error', fail);
+    });
     showFlash();
   }
 
@@ -178,7 +185,7 @@
         <p class="meta event-card__meta">${icon('clock')}<span><span class="visually-hidden">When: </span>${fmtWhen(d)}</span></p>
         <p class="meta event-card__meta">${icon('pin')}<span><span class="visually-hidden">Where: </span>${esc(place ? place.name : '')}${distance}</span></p>
         <div class="event-card__foot">
-          <p class="meta going">${avatarStack(people)}<span>${people.length} going · groups of ${ev.size}</span></p>
+          <p class="meta going">${avatarStack(people)}<span>${people.length} going</span></p>
           ${fit}
         </div>
       </div>
@@ -214,7 +221,7 @@
         </fieldset>` : '';
     const d = dialog(`
       <form class="report" novalidate>
-        <h2 id="dlg-title">Report ${pick ? 'a concern' : esc(ctx.name)}</h2>
+        <h2 id="dlg-title">Report ${pick ? 'a Concern' : esc(ctx.name)}</h2>
         <p class="meta">Reports are private. Nobody is told who reported them.</p>
         ${who}
         <fieldset class="field"><legend class="field__label">What happened?</legend>
@@ -250,7 +257,7 @@
       S.report({ context: ctx.about, context_name: ctx.name || '', about: person ? person.name : ctx.name, reason, details: form.elements.details.value.trim(), blocked: doBlock ? 'yes' : 'no' });
       if (doBlock) S.block(whoId);
       form.outerHTML = `<div class="report-done">
-        <h2 id="dlg-title">Thanks. We've received your report.</h2>
+        <h2 id="dlg-title">Thanks, We've Received Your Report</h2>
         <p>A person on the Buddy team reviews every report within 24 hours. We may contact you by email if we need more detail.</p>
         ${doBlock ? `<p>You blocked ${esc(person.name)}. They can't see your profile or join your groups.</p>` : ''}
         <div class="banner banner--warm">${icon('alert', 'banner__icon')}<p>If you are in danger right now, call 911.</p></div>
@@ -281,8 +288,8 @@
     const others = p.interests.filter((i) => !u.interests.includes(i));
     const d = dialog(`
       <div class="person-head">${avatar(p, 72)}<div><h2 id="dlg-title">${esc(p.name)}</h2><p class="meta">${esc(S.areaName(p.area))} · ${esc(p.stage)}</p></div></div>
-      ${shared.length ? `<h4>What you share</h4><ul class="tag-list">${shared.map((i) => `<li class="tag tag--shared">${icon('check')}<span class="visually-hidden">Shared: </span>${esc(S.catName(i))}</li>`).join('')}</ul>` : ''}
-      ${others.length ? `<h4 class="mt">Also into</h4><ul class="tag-list">${others.map((i) => `<li class="tag">${esc(S.catName(i))}</li>`).join('')}</ul>` : ''}
+      ${shared.length ? `<h4>What You Share</h4><ul class="tag-list">${shared.map((i) => `<li class="tag tag--shared">${icon('check')}<span class="visually-hidden">Shared: </span>${esc(S.catName(i))}</li>`).join('')}</ul>` : ''}
+      ${others.length ? `<h4 class="mt">Also Into</h4><ul class="tag-list">${others.map((i) => `<li class="tag">${esc(S.catName(i))}</li>`).join('')}</ul>` : ''}
       ${p.sample ? '<p class="meta mt">Example member for the prototype.</p>' : ''}
       <div class="dialog__actions"><button type="button" class="btn btn--danger-secondary" data-report>${icon('flag')}Report</button><button type="button" class="btn btn--secondary" data-block>Block</button></div>`);
     $('[data-report]', d).onclick = () => { d.close(); openReport({ about: 'person', id: p.id, name: p.name, onBlock: onChange }); };

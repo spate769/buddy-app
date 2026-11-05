@@ -2,7 +2,7 @@
   const { renderChrome, icon, esc, $, param, chips, readPhoto, avatar, flash } = UI;
   renderChrome('signup');
 
-  const STEPS = ['Account', 'Who you are', 'Interests', 'About you'];
+  const STEPS = ['Account', 'Photo', 'Interests', 'About you'];
   let step = 1;
   const existing = Store.user();
   if (existing && existing.complete) { location.replace('events.html'); return; }
@@ -40,7 +40,7 @@
   /* Step 1 · Account */
   function renderAccount() {
     host.innerHTML = `
-      <h1>Create your profile</h1>
+      <h1>Create Your Profile</h1>
       <p class="lede">It takes about a minute. Buddy is free.</p>
       <div id="errs" class="banner banner--error error-summary" role="alert" tabindex="-1" hidden></div>
       <form id="f" novalidate>
@@ -99,8 +99,8 @@
     const u = Store.user();
     let photo = u.photo || '';
     host.innerHTML = `
-      <h1>Who should your group look for?</h1>
-      <p class="lede">Add a photo or a social link so people can put a face to your name before you meet.</p>
+      <h1>Add Your Photo</h1>
+      <p class="lede">A clear photo of your face helps your group recognize you when you meet.</p>
       <div id="errs" class="banner banner--error error-summary" role="alert" tabindex="-1" hidden></div>
       <form id="f" novalidate>
         <div class="field">
@@ -110,7 +110,7 @@
           ${errP('name')}
         </div>
         <fieldset class="identity" aria-describedby="id-err">
-          <legend class="field__label">Your photo or social link</legend>
+          <legend class="field__label">Profile photo</legend>
           <div class="photo-pick">
             <span id="photo-preview">${avatar({ name: u.name || '?', photo }, 96)}</span>
             <div class="stack-sm">
@@ -120,9 +120,8 @@
               <button type="button" class="btn btn--tertiary btn--sm" id="photo-remove"${photo ? '' : ' hidden'}>Remove photo</button>
             </div>
           </div>
-          <div class="or">or</div>
-          <div class="field" style="margin:0">
-            <label class="field__label" for="social">Social link</label>
+          <div class="field" style="margin:var(--space-5) 0 0">
+            <label class="field__label" for="social">Social link (optional)</label>
             <p class="field__hint" id="social-hint">Instagram, LinkedIn, Facebook or TikTok. Your group can see it.</p>
             <input class="input" id="social" type="url" inputmode="url" placeholder="e.g. instagram.com/yourname" value="${esc(u.social || '')}" aria-describedby="social-hint">
           </div>
@@ -149,7 +148,7 @@
       if (social && !/^https?:\/\//i.test(social)) social = 'https://' + social;
       const nMsg = name ? '' : 'Enter your first name';
       const sValid = !social || /^https?:\/\/[^\s.]+\.[^\s]+/i.test(social);
-      const iMsg = !photo && !social ? 'Add a photo or a social link so your group knows who they are meeting' : (!sValid ? 'Enter a full link like instagram.com/yourname' : '');
+      const iMsg = !photo ? 'Add a photo of your face so your group can recognize you' : (!sValid ? 'Enter a full link like instagram.com/yourname' : '');
       fieldError('name', nMsg); fieldError('id', iMsg);
       if (nMsg) errs.push(['name', nMsg]); if (iMsg) errs.push([photo ? 'social' : 'photo', iMsg]);
       if (errorSummary(errs)) return;
@@ -163,7 +162,7 @@
     const u = Store.user();
     const picked = new Set(u.interests || []);
     host.innerHTML = `
-      <h1>What do you like doing?</h1>
+      <h1>What Do You Like Doing?</h1>
       <p class="lede">Pick at least 3. We use these to suggest events and to match your group.</p>
       <div id="errs" class="banner banner--error error-summary" role="alert" tabindex="-1" hidden></div>
       <form id="f" novalidate>
@@ -198,7 +197,7 @@
     const u = Store.user();
     const opt = (v, l, sel) => `<option value="${esc(v)}"${sel === v ? ' selected' : ''}>${esc(l)}</option>`;
     host.innerHTML = `
-      <h1>A little about you</h1>
+      <h1>A Little About You</h1>
       <p class="lede">This helps us put you with people you'll get on with.</p>
       <div id="errs" class="banner banner--error error-summary" role="alert" tabindex="-1" hidden></div>
       <form id="f" novalidate>

@@ -1,0 +1,9 @@
+// Cloudflare settings for Buddy. The site is plain HTML/CSS/JS served as static files.
+{
+  "name": "buddy-app",
+  "compatibility_date": "2026-11-03",
+  "assets": {
+    "directory": ".",
+    "not_found_handling": "404-page"
+  }
+}

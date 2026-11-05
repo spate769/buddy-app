@@ -26,7 +26,7 @@
           <li>${icon('users')}<div><strong>Groups of ${ev.size}</strong><span class="meta">${people.length ? `${people.length} going so far${ages.length ? `, ages ${Math.min(...ages)} to ${Math.max(...ages)}` : ''}. ${groupsCount > 1 ? `They'll be split into ${groupsCount} groups.` : ''}` : 'Be the first to join. Others are placed in your group as they sign up.'}</span></div></li>
         </ul>
         <p class="long prose">${esc(ev.desc)}</p>
-        ${people.length ? `<h2 class="mt" style="font-size:var(--text-h3)">Who's going</h2><p class="going meta">${avatarStack(people, 6)}<span>${people.map((p) => esc(p.name)).slice(0, 4).join(', ')}${people.length > 4 ? ` and ${people.length - 4} more` : ''}</span></p><p class="meta">Example members for the prototype. You'll see your own group's profiles after you join.</p>` : ''}
+        ${people.length ? `<h2 class="mt" style="font-size:var(--text-h3)">Who's Going</h2><p class="going meta">${avatarStack(people, 6)}<span>${people.map((p) => esc(p.name)).slice(0, 4).join(', ')}${people.length > 4 ? ` and ${people.length - 4} more` : ''}</span></p><p class="meta">Example members for the prototype. You'll see your own group's profiles after you join.</p>` : ''}
         <div class="mini-map" id="mini-map" aria-label="Map showing ${esc(place.name)}"></div>
         <p class="mt"><button type="button" class="btn btn--danger-secondary btn--sm" id="report-ev">${icon('flag')}Report this event</button></p>
       </div>
@@ -48,7 +48,7 @@
 
   function renderPanel() {
     if (!u) {
-      panel.innerHTML = `<h2 id="panel-title">Join a group for this event</h2>
+      panel.innerHTML = `<h2 id="panel-title">Join a Group for This Event</h2>
         <p>Create a profile and we'll place you with ${ev.size - 1} people who fit you best, by distance, age and interests.</p>
         <a class="btn btn--primary btn--lg btn--block" href="signup.html">Create your profile</a>
         <p class="mt meta">Already have one? <a href="login.html?next=${encodeURIComponent('event.html?id=' + ev.id)}">Log in</a></p>`;
@@ -57,7 +57,7 @@
     const g = Store.groupForEvent(ev.id);
     if (g) return renderJoined(g);
     if (!score.eligible) {
-      panel.innerHTML = `<h2 id="panel-title">This is a women-only group</h2>
+      panel.innerHTML = `<h2 id="panel-title">This Is a Women-Only Group</h2>
         <p>Women-only events are open to people who identify as women. You can update your gender on your profile if it isn't right.</p>
         <a class="btn btn--primary btn--block" href="events.html">Find another event</a>
         <p class="mt"><a href="profile.html">Edit profile</a></p>`;
@@ -66,7 +66,7 @@
     const p = score.parts;
     const shared = ev.cat && u.interests.includes(ev.cat);
     panel.innerHTML = `
-      <h2 id="panel-title">Join a group</h2>
+      <h2 id="panel-title">Join a Group</h2>
       <p class="fit" style="margin-bottom:var(--space-4)"><span class="fit__label">${BuddyMatch.fitLabel(score.percent)} for you</span><span class="meter" aria-hidden="true"><span style="width:${score.percent}%"></span></span><span class="meta tabular">${score.percent}%</span></p>
       <ul class="why" aria-label="Why this fits you">
         ${rowFor('Distance', p.geo, `${BuddyMatch.distanceLabel(score.distance)} from ${esc(Store.areaName(u.area))}`)}
@@ -102,7 +102,7 @@
     const fm = e.target;
     const prefs = { size: Number(fm.elements.size.value), similarInterests: fm.elements.similarInterests.checked, similarAge: fm.elements.similarAge.checked, sameStage: fm.elements.sameStage.checked, womenOnly: !!(fm.elements.womenOnly && fm.elements.womenOnly.checked) };
     const steps = ['Checking who lives nearby', 'Grouping people close to your age', 'Matching shared interests', 'Opening your group chat'];
-    panel.innerHTML = `<h2 id="panel-title">Finding your group</h2><div class="matching" role="status" aria-live="polite"><ol>${steps.map((s, i) => `<li data-i="${i}">${icon('check')}<span>${s}</span></li>`).join('')}</ol></div>`;
+    panel.innerHTML = `<h2 id="panel-title">Finding Your Group</h2><div class="matching" role="status" aria-live="polite"><ol>${steps.map((s, i) => `<li data-i="${i}">${icon('check')}<span>${s}</span></li>`).join('')}</ol></div>`;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const lis = panel.querySelectorAll('.matching li');
     let i = 0;
@@ -121,7 +121,7 @@
     const r = g.reasons;
     panel.innerHTML = `
       <div class="banner banner--success" style="margin-bottom:var(--space-4)">${icon('check', 'banner__icon')}<div><strong>You're in. Your group chat is ready.</strong><p>${members.length ? `You're with ${members.length} ${members.length === 1 ? 'person' : 'people'}.` : "You're the first one here. People who join next are added to your group."}</p></div></div>
-      <h2 id="panel-title">Your group</h2>
+      <h2 id="panel-title">Your Group</h2>
       <ul class="member-list">
         <li class="you">${avatar(u, 40)}<div><strong>${esc(u.name)} (you)</strong></div></li>
         ${members.map((p) => `<li><button type="button" data-person="${esc(p.id)}">${avatar(p, 40)}<div><strong>${esc(p.name)}</strong><p class="meta">${esc(Store.areaName(p.area))} · ${esc(p.stage)}</p></div></button></li>`).join('')}
@@ -136,7 +136,7 @@
       <p class="mt"><button type="button" class="btn btn--tertiary btn--sm" id="leave">Leave this group</button></p>`;
     panel.querySelectorAll('[data-person]').forEach((b) => b.onclick = () => openPerson(Store.person(b.dataset.person), { onChange: () => renderJoined(Store.group(g.id)) }));
     $('#leave').onclick = () => {
-      const d = UI.dialog(`<h2 id="dlg-title">Leave this group?</h2><p>You'll leave the group chat. You can join the event again and be placed in a new group.</p><div class="dialog__actions"><button type="button" class="btn btn--secondary" data-cancel>Cancel</button><button type="button" class="btn btn--danger" data-ok>Leave group</button></div>`);
+      const d = UI.dialog(`<h2 id="dlg-title">Leave This Group?</h2><p>You'll leave the group chat. You can join the event again and be placed in a new group.</p><div class="dialog__actions"><button type="button" class="btn btn--secondary" data-cancel>Cancel</button><button type="button" class="btn btn--danger" data-ok>Leave group</button></div>`);
       d.querySelector('[data-cancel]').onclick = () => d.close();
       d.querySelector('[data-ok]').onclick = () => { Store.leaveGroup(g.id); d.close(); toast('You left the group.'); renderPanel(); };
     };

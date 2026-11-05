@@ -1,0 +1,13 @@
+# Files in the repo that should NOT be published on the website
+.git
+.gitignore
+.assetsignore
+wrangler.jsonc
+README.md
+*.md
+docs/
+node_modules/
+.wrangler/
+.DS_Store
+/tokens.css
+netlify.toml

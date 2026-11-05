@@ -1,1 +1,1 @@
-(function(){UI.renderChrome('');})();
+(function(){UI.renderChrome('safety');})();
