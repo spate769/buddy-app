@@ -185,7 +185,7 @@
         <p class="meta event-card__meta">${icon('clock')}<span><span class="visually-hidden">When: </span>${fmtWhen(d)}</span></p>
         <p class="meta event-card__meta">${icon('pin')}<span><span class="visually-hidden">Where: </span>${esc(place ? place.name : '')}${distance}</span></p>
         <div class="event-card__foot">
-          <p class="meta going">${avatarStack(people)}<span>${people.length} going</span></p>
+          <p class="meta going">${avatarStack(people)}<span>${people.length} going${people.length ? ` · ${Math.max(1, Math.ceil(people.length / ev.size))} ${Math.ceil(people.length / ev.size) > 1 ? 'groups' : 'group'} of ${ev.size}` : ''}</span></p>
           ${fit}
         </div>
       </div>

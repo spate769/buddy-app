@@ -23,7 +23,7 @@
         <ul class="facts">
           <li>${icon('calendar')}<div><strong>${esc(fmtLong(ev.startDate))}</strong><span class="meta">${fmtTime(ev.startDate)}</span></div></li>
           <li>${icon('pin')}<div><strong>${esc(place.name)}</strong><span class="meta">${esc(place.area)}${u ? ` · ${BuddyMatch.distanceLabel(BuddyMatch.km(BuddyMatch.area(u.area), place))}` : ''}</span></div></li>
-          <li>${icon('users')}<div><strong>Groups of ${ev.size}</strong><span class="meta">${people.length ? `${people.length} going so far${ages.length ? `, ages ${Math.min(...ages)} to ${Math.max(...ages)}` : ''}. ${groupsCount > 1 ? `They'll be split into ${groupsCount} groups.` : ''}` : 'Be the first to join. Others are placed in your group as they sign up.'}</span></div></li>
+          <li>${icon('users')}<div><strong>Small groups of ${ev.size}</strong><span class="meta">${people.length ? `${people.length} going so far${ages.length ? `, ages ${Math.min(...ages)} to ${Math.max(...ages)}` : ''}. ${groupsCount > 1 ? `Everyone is split into ${groupsCount} groups of ${ev.size}, so you meet a few people, not a crowd.` : ''}` : 'Be the first to join. Others are placed in your group as they sign up.'}</span></div></li>
         </ul>
         <p class="long prose">${esc(ev.desc)}</p>
         ${people.length ? `<h2 class="mt" style="font-size:var(--text-h3)">Who's Going</h2><p class="going meta">${avatarStack(people, 6)}<span>${people.map((p) => esc(p.name)).slice(0, 4).join(', ')}${people.length > 4 ? ` and ${people.length - 4} more` : ''}</span></p><p class="meta">Example members for the prototype. You'll see your own group's profiles after you join.</p>` : ''}

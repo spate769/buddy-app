@@ -31,7 +31,7 @@
       const people = Store.attendees(x.ev);
       pins[x.ev.id] = map.addPin({
         lat: p.lat, lng: p.lng, title: x.ev.title, html: pinHtml(x.ev, i + 1),
-        popup: `<strong>${esc(x.ev.title)}</strong>${esc(fmtWhen(x.ev.startDate))}<br>${esc(p.name)}<br>${people.length} going · groups of ${x.ev.size}<br><a class="btn btn--primary btn--sm" href="event.html?id=${encodeURIComponent(x.ev.id)}">View event</a>`,
+        popup: `<strong>${esc(x.ev.title)}</strong>${esc(fmtWhen(x.ev.startDate))}<br>${esc(p.name)}<br>${people.length} going · split into groups of ${x.ev.size}<br><a class="btn btn--primary btn--sm" href="event.html?id=${encodeURIComponent(x.ev.id)}">View event</a>`,
         onClick: () => highlight(x.ev.id, true)
       });
       bounds.push([p.lat, p.lng]);

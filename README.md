@@ -2,7 +2,7 @@
 
 **Make Friends Doing What You Love.**
 
-Buddy matches young adults into small groups of 5 or 6 for things they already enjoy: pickup basketball, a movie, a morning walk. Our primary customer is 18 to 30, the age group hit hardest by loneliness, and every adult is welcome. Pick an event, and the matching algorithm places you with people nearby who share your interests. A group chat opens so the group can make the plan. After the meetup, a 5-question check-in asks how it went.
+Buddy matches young adults into small groups of 5 or 6 for things they already enjoy: pickup basketball, a movie, a morning walk. Our primary customer is 18 to 30, the age group hit hardest by loneliness, and every adult is welcome. Pick an event, and the matching algorithm places you with people nearby who share your interests. A popular event can have lots of people going; they're split into several groups of 5 or 6, so everyone meets a small group, not a crowd. A group chat opens so the group can make the plan. After the meetup, a 5-question check-in asks how it went.
 
 Business 4558 · Checkpoint 2 prototype · Team: Andrew, Carina, Mert, Sheel, Pruthvish
 
