@@ -25,7 +25,7 @@
           <h2 id="private-title">Only You Can See These</h2>
           <dl class="kv">
             <dt>Email</dt><dd>${esc(u.email)}</dd>
-            <dt>Age</dt><dd>${esc(u.age)} <span class="meta">(used to group you with people around your age)</span></dd>
+            <dt>Age</dt><dd>${esc(u.age)} <span class="meta">(only used if you ask for people close to your age)</span></dd>
             <dt>Gender</dt><dd>${esc(genderName[u.gender || ''] || 'Not shared')} <span class="meta">(only for women-only groups)</span></dd>
           </dl>
         </section>

@@ -1,10 +1,11 @@
 /* ==========================================================
    Buddy · matching algorithm
-   Sorts and groups people by four factors, in this order of weight:
-     1. Geography     35%  distance from your area to the event / to them
-     2. Age           30%  closeness in age
-     3. Interests     20%  the event's activity plus interests in common
-     4. Demographics  15%  same life stage (student, parent, new to London...)
+   Sorts and groups people by three factors by default:
+     1. Geography     40%  distance from your area to the event / to them
+     2. Interests     35%  the event's activity plus interests in common
+     3. Demographics  25%  same life stage (student, working, new to London...)
+   Age is NOT used by default. It only counts when a person ticks
+   "Close to my age" when joining (+30% weight, and people within 8 years).
    Hard rule: women-only events and groups only include women.
 
    This file has no dependencies, so it can be ported to Python
@@ -12,7 +13,7 @@
    ========================================================== */
 (function () {
   const D = window.BUDDY_DATA;
-  const WEIGHTS = { geo: 0.35, age: 0.30, interest: 0.20, demo: 0.15 };
+  const WEIGHTS = { geo: 0.40, age: 0, interest: 0.35, demo: 0.25 };
   const MAX_KM = 12;      // 0 points at 12 km or more
   const MAX_AGE_GAP = 15; // 0 points at a 15-year gap or more
 
@@ -82,7 +83,7 @@
     const w = { ...WEIGHTS };
     if (prefs.similarInterests) w.interest += 0.15;
     if (prefs.sameStage) w.demo += 0.15;
-    if (prefs.similarAge) w.age += 0.10;
+    if (prefs.similarAge) w.age += 0.30; // optional, chosen by the person joining
 
     let pool = people.filter(Boolean);
     const womenOnly = ev.womenOnly || prefs.womenOnly;

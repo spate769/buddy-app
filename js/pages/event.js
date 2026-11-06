@@ -4,7 +4,7 @@
   const ev = Store.event(param('id'));
   const host = $('#detail');
   if (!ev) {
-    host.innerHTML = `<section class="empty"><h1 class="empty__title">We can't find that event</h1><p class="empty__body">It may have already happened, or the link might be wrong.</p><a class="btn btn--primary" href="events.html">See all events</a></section>`;
+    host.innerHTML = `<section class="empty"><h1 class="empty__title">We Can't Find That Event</h1><p class="empty__body">It may have already happened, or the link might be wrong.</p><a class="btn btn--primary" href="events.html">See all events</a></section>`;
     return;
   }
   document.title = `${ev.title} – Buddy`;
@@ -33,11 +33,9 @@
       <aside class="join-panel" id="panel" aria-labelledby="panel-title"></aside>
     </div>`;
 
-  if (window.L) {
-    const m = L.map('mini-map', { scrollWheelZoom: false, zoomControl: false, dragging: !L.Browser.mobile }).setView([place.lat, place.lng], 15);
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { subdomains: 'abcd', maxZoom: 19, attribution: '&copy; OpenStreetMap &copy; CARTO' }).addTo(m);
-    L.marker([place.lat, place.lng], { icon: L.divIcon({ className: '', iconSize: [34, 34], iconAnchor: [17, 34], html: `<span class="pin${ev.womenOnly ? ' pin--warm' : ''}"><span>${icon('pin').replace('class="ico ', 'style="width:16px;height:16px" class="ico ')}</span></span>` }), title: place.name }).addTo(m);
-  }
+  BuddyMap.create('mini-map', { center: [place.lat, place.lng], zoom: 15, interactive: false }).then((m) => {
+    if (m) m.addPin({ lat: place.lat, lng: place.lng, title: place.name, html: `<span class="pin${ev.womenOnly ? ' pin--warm' : ''}"><span>${icon('pin').replace('class="ico ', 'style="width:16px;height:16px" class="ico ')}</span></span>` });
+  });
   $('#report-ev').onclick = () => {
     if (!u) { location.href = 'login.html?next=' + encodeURIComponent('event.html?id=' + ev.id); return; }
     openReport({ about: 'event', id: ev.id, name: 'this event' });
@@ -70,7 +68,6 @@
       <p class="fit" style="margin-bottom:var(--space-4)"><span class="fit__label">${BuddyMatch.fitLabel(score.percent)} for you</span><span class="meter" aria-hidden="true"><span style="width:${score.percent}%"></span></span><span class="meta tabular">${score.percent}%</span></p>
       <ul class="why" aria-label="Why this fits you">
         ${rowFor('Distance', p.geo, `${BuddyMatch.distanceLabel(score.distance)} from ${esc(Store.areaName(u.area))}`)}
-        ${rowFor('Age', p.age, score.ageRange ? `People going are ${score.ageRange[0]} to ${score.ageRange[1]}` : 'No one has joined yet')}
         ${rowFor('Interests', p.interest, shared ? `You picked ${esc(Store.catName(ev.cat)).toLowerCase()}` : `Not one of your picks, but people going share some interests`)}
         ${rowFor('Life stage', p.demo, score.sameStage ? `${score.sameStage} ${score.sameStage === 1 ? 'person is' : 'people are'} also "${esc(u.stage)}"` : 'A mix of life stages')}
       </ul>
@@ -86,7 +83,7 @@
           <legend class="field__label">Match me with people who are</legend>
           <div class="toggle-list">
             <label class="choice"><input type="checkbox" name="similarInterests" checked><span>Into the same things</span></label>
-            <label class="choice"><input type="checkbox" name="similarAge" checked><span>Close to my age</span></label>
+            <label class="choice"><input type="checkbox" name="similarAge"><span>Close to my age<small>Optional</small></span></label>
             <label class="choice"><input type="checkbox" name="sameStage"><span>At the same life stage<small>${esc(u.stage)}</small></span></label>
             ${ev.womenOnly ? `<p class="meta">${icon('check')} Everyone in this group is a woman.</p>` : (u.gender === 'woman' ? `<label class="choice"><input type="checkbox" name="womenOnly"><span>Women only</span></label>` : '')}
           </div>
@@ -101,7 +98,7 @@
     e.preventDefault();
     const fm = e.target;
     const prefs = { size: Number(fm.elements.size.value), similarInterests: fm.elements.similarInterests.checked, similarAge: fm.elements.similarAge.checked, sameStage: fm.elements.sameStage.checked, womenOnly: !!(fm.elements.womenOnly && fm.elements.womenOnly.checked) };
-    const steps = ['Checking who lives nearby', 'Grouping people close to your age', 'Matching shared interests', 'Opening your group chat'];
+    const steps = ['Checking who lives nearby', 'Matching shared interests', prefs.similarAge ? 'Keeping ages close to yours' : 'Balancing life stages', 'Opening your group chat'];
     panel.innerHTML = `<h2 id="panel-title">Finding Your Group</h2><div class="matching" role="status" aria-live="polite"><ol>${steps.map((s, i) => `<li data-i="${i}">${icon('check')}<span>${s}</span></li>`).join('')}</ol></div>`;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const lis = panel.querySelectorAll('.matching li');

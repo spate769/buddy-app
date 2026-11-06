@@ -4,14 +4,14 @@ The JavaScript version is in `js/match.js`. This document explains it in plain l
 
 ## Factors and weights
 
-People are sorted by four factors, in this order:
+People are sorted by three factors by default. Age is a fourth, optional factor that only counts when the person joining ticks "Close to my age". Our primary customer is 18 to 30, but every adult can join, so age is a choice, not something we apply automatically.
 
 | Factor | Weight | Score from 0 to 1 |
 |---|---|---|
-| Geography | 35% | `1 − distance_km / 12` (0 at 12 km or more). Distance is between area centres, never home addresses |
-| Age | 30% | `1 − age_gap / 15` (0 at a 15-year gap or more) |
-| Interests | 20% | Overlap of interest lists: shared ÷ combined (Jaccard) |
-| Demographics | 15% | 1 if the same life stage (Student, Working, New to London, Parent, Kids have left home, Retired), otherwise 0 |
+| Geography | 40% | `1 − distance_km / 12` (0 at 12 km or more). Distance is between area centres, never home addresses |
+| Interests | 35% | Overlap of interest lists: shared ÷ combined (Jaccard) |
+| Demographics | 25% | 1 if the same life stage (Student, Working, New to London, Parent, Kids have left home, Retired), otherwise 0 |
+| Age (optional) | 0%, or +30% if chosen | `1 − age_gap / 15` (0 at a 15-year gap or more) |
 
 **Hard rule:** women-only events and women-only groups include only members who identify as women.
 
@@ -20,18 +20,17 @@ People are sorted by four factors, in this order:
 For you and one event:
 
 - **Geography:** distance from your area to the venue.
-- **Age:** gap between your age and the median age of people going.
 - **Interests:** 0.6 if the event's activity is one of your interests, plus 0.8 × your average overlap with the people going, capped at 1.
 - **Demographics:** share of people going who are at your life stage.
 
-`fit = 0.35·geo + 0.30·age + 0.20·interests + 0.15·demo`, shown as a percentage. Labels: 72%+ "Great fit", 55%+ "Good fit", otherwise "Might fit".
+`fit = 0.40·geo + 0.35·interests + 0.25·demo`, shown as a percentage. Labels: 72%+ "Great fit", 55%+ "Good fit", otherwise "Might fit".
 
 ## 2. Forming your group (when you join)
 
 1. Start with everyone going to the event, minus anyone you blocked.
 2. If the event or your choice is women-only, keep only women.
 3. If "Close to my age" is on, keep people within 8 years of you. If that leaves too few people, use everyone instead.
-4. Score each person against you with the four factors. Your choices add weight: similar interests +0.15, same life stage +0.15, similar age +0.10.
+4. Score each person against you with the four factors. Your choices add weight: similar interests +0.15, same life stage +0.15, close to my age +0.30.
 5. Take the top `size − 1` people (size is 5 or 6). That's your group.
 
 The page then explains the group: age range, average distance, top shared interests.
@@ -42,7 +41,7 @@ The page then explains the group: age range, average distance, top shared intere
 from math import radians, sin, cos, asin, sqrt
 from statistics import median
 
-WEIGHTS = {"geo": 0.35, "age": 0.30, "interest": 0.20, "demo": 0.15}
+WEIGHTS = {"geo": 0.40, "age": 0.0, "interest": 0.35, "demo": 0.25}  # age only counts if chosen
 MAX_KM, MAX_AGE_GAP = 12, 15
 
 def km(a, b):
@@ -82,7 +81,7 @@ def form_group(me, event, going, areas, prefs):
     w = dict(WEIGHTS)
     if prefs.get("similarInterests"): w["interest"] += 0.15
     if prefs.get("sameStage"): w["demo"] += 0.15
-    if prefs.get("similarAge"): w["age"] += 0.10
+    if prefs.get("similarAge"): w["age"] += 0.30
     pool = list(going)
     if event.get("womenOnly") or prefs.get("womenOnly"):
         pool = [p for p in pool if p.get("gender") == "woman"]

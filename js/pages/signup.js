@@ -212,7 +212,7 @@
         </div>
         <div class="field">
           <label class="field__label" for="age">Your age</label>
-          <p class="field__hint" id="age-hint">We group you with people around your age. Others don't see your exact age.</p>
+          <p class="field__hint" id="age-hint">Buddy is built for people 18 to 30, and every adult is welcome. Age is only used if you ask for people close to your age. Others never see your exact age.</p>
           <input class="input" id="age" type="number" inputmode="numeric" min="18" max="100" style="max-width:10rem" value="${esc(u.age || '')}" aria-describedby="age-hint age-err" required>
           ${errP('age')}
         </div>

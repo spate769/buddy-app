@@ -5,7 +5,7 @@
   const g = Store.group(param('g'));
   const host = $('#chat');
   if (!g) {
-    host.innerHTML = `<section class="empty page"><h1 class="empty__title">We can't find that group</h1><p class="empty__body">You may have left it, or it was made on another device.</p><a class="btn btn--primary" href="groups.html">Go to my groups</a></section>`;
+    host.innerHTML = `<section class="empty page"><h1 class="empty__title">We Can't Find That Group</h1><p class="empty__body">You may have left it, or it was made on another device.</p><a class="btn btn--primary" href="groups.html">Go to my groups</a></section>`;
     return;
   }
   document.title = `${g.eventTitle} – Buddy`;

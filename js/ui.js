@@ -88,7 +88,7 @@
   function showFlash() { try { const f = sessionStorage.getItem('buddy.flash'); if (f) { sessionStorage.removeItem('buddy.flash'); toast(f); } } catch (e) {} }
 
   /* ---------- Page chrome ---------- */
-  const LOGO = `<svg class="logo__mark" viewBox="0 0 40 28" aria-hidden="true"><circle cx="9" cy="16" r="7" fill="var(--sky)"/><circle cx="31" cy="16" r="7" fill="var(--apricot)"/><circle cx="20" cy="12" r="8" fill="var(--harbor)"/></svg><span class="logo__word">Buddy</span>`;
+  const LOGO = `<svg class="logo__mark" viewBox="0 0 40 28" aria-hidden="true"><circle cx="9" cy="16" r="7" fill="var(--sky)"/><circle cx="31" cy="16" r="7" fill="var(--apricot)"/><circle cx="20" cy="12" r="8" fill="var(--ink)"/></svg><span class="logo__word">Buddy</span>`;
 
   function renderChrome(active) {
     const u = S.user();

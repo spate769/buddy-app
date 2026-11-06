@@ -228,6 +228,9 @@ body.has-tabbar { padding-bottom: calc(var(--tabbar-h) + env(safe-area-inset-bot
 .leaflet-popup-content { margin: var(--space-3) var(--space-4); font-size: var(--text-meta); line-height: 1.4; }
 .leaflet-popup-content strong { display: block; font-size: var(--text-ui); margin-bottom: 2px; }
 .leaflet-popup-content a.btn { margin-top: var(--space-2); color: var(--on-harbor); }
+.gm-popup { font-family: var(--font-body); font-size: var(--text-meta); line-height: 1.4; color: #1E293B; padding: 2px 4px; }
+.gm-popup strong { display: block; font-size: var(--text-ui); margin-bottom: 2px; }
+.gm-popup a.btn { margin-top: var(--space-2); color: #FFFFFF; background: #B85238; }
 .map-fallback { display: grid; place-items: center; height: 100%; padding: var(--space-5); text-align: center; color: var(--driftwood); }
 .legend { display: flex; flex-wrap: wrap; gap: var(--space-4); margin: 0 0 var(--space-3); }
 .legend span { display: inline-flex; align-items: center; gap: var(--space-2); }
@@ -356,7 +359,7 @@ dialog.dialog h2 { padding-right: var(--space-7); font-size: var(--text-h3); }
 h1, h2, h3, .logo__word, .stub__day, .home-steps li::before { font-variation-settings: normal; letter-spacing: -0.02em; }
 h1 { font-weight: 800; }
 h2, h3 { font-weight: 700; }
-.logo__word { font-weight: 800; color: var(--harbor); font-size: 1.625rem; }
+.logo__word { font-weight: 800; color: var(--ink); font-size: 1.625rem; }
 @media (prefers-reduced-motion: no-preference) {
   main { animation: page-in var(--dur-slow) var(--ease-out); }
   @keyframes page-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
@@ -376,7 +379,7 @@ h2, h3 { font-weight: 700; }
 .opener { padding-block: var(--space-7) var(--space-8); }
 .opener__inner { display: grid; gap: var(--space-7); align-items: center; }
 @media (min-width: 900px) { .opener__inner { grid-template-columns: 1.1fr 0.9fr; min-height: calc(100vh - var(--header-h) - 96px); } }
-.opener__brand { display: flex; align-items: center; gap: var(--space-3); margin: 0 0 var(--space-4); font-family: var(--font-display); font-weight: 800; letter-spacing: -0.04em; color: var(--harbor); font-size: clamp(3.5rem, 2rem + 6vw, 7rem); line-height: 0.9; }
+.opener__brand { display: flex; align-items: center; gap: var(--space-3); margin: 0 0 var(--space-4); font-family: var(--font-display); font-weight: 800; letter-spacing: -0.04em; color: var(--ink); font-size: clamp(3.5rem, 2rem + 6vw, 7rem); line-height: 0.9; }
 .opener__mark { width: 1.2em; height: auto; }
 .opener h1 { font-size: clamp(2.25rem, 1.4rem + 3.4vw, 4rem); line-height: 1.04; max-width: 13ch; margin: 0 0 var(--space-5); }
 .opener__sub { font-size: var(--text-long); line-height: var(--leading-long); color: var(--driftwood); max-width: 38ch; margin: 0 0 var(--space-6); }

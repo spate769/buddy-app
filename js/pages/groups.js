@@ -6,7 +6,7 @@
   const groups = Store.groups();
   if (!groups.length) {
     $('#list').innerHTML = `<section class="empty" aria-labelledby="empty-title">
-      <h2 class="empty__title" id="empty-title">You haven't joined a group yet</h2>
+      <h2 class="empty__title" id="empty-title">You Haven't Joined a Group Yet</h2>
       <p class="empty__body">Pick an event and we'll place you in a group of 5 or 6. Your group chat will show up here.</p>
       <a class="btn btn--primary" href="events.html">Find an event</a>
     </section>`;

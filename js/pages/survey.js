@@ -4,7 +4,7 @@
   renderChrome('groups');
   const g = Store.group(param('g'));
   const host = $('#survey');
-  if (!g) { host.innerHTML = `<section class="empty"><h1 class="empty__title">We can't find that group</h1><p class="empty__body">Pick a group from your list to rate it.</p><a class="btn btn--primary" href="groups.html">Go to my groups</a></section>`; return; }
+  if (!g) { host.innerHTML = `<section class="empty"><h1 class="empty__title">We Can't Find That Group</h1><p class="empty__body">Pick a group from your list to rate it.</p><a class="btn btn--primary" href="groups.html">Go to my groups</a></section>`; return; }
   const members = g.memberIds.map((id) => Store.person(id)).filter((p) => p && !Store.isBlocked(p.id));
 
   const done = Store.survey(g.id);
@@ -60,7 +60,7 @@
   function thanks(a, already) {
     host.innerHTML = `
       <div class="banner banner--success" style="margin-bottom:var(--space-5)">${icon('check', 'banner__icon')}<div><strong>${already ? 'You already sent feedback for this meetup.' : 'Thanks. Your feedback was sent.'}</strong></div></div>
-      <h1>${a.meet_again === 'Yes' ? 'Glad it went well.' : 'Thanks for telling us.'}</h1>
+      <h1>${a.meet_again === 'Yes' ? 'Glad It Went Well.' : 'Thanks for Telling Us.'}</h1>
       <p class="lede">${a.meet_again === 'Yes' ? "We let your group know you'd like to meet again. Suggest a next plan in the group chat." : "We'll use this to make better groups for you next time."}</p>
       <div class="form-actions">
         ${a.meet_again === 'Yes' ? `<a class="btn btn--primary" href="chat.html?g=${encodeURIComponent(g.id)}">Plan the next one</a><a class="btn btn--secondary" href="events.html">Find another event</a>` : `<a class="btn btn--primary" href="events.html">Find another event</a><a class="btn btn--secondary" href="groups.html">Back to my groups</a>`}

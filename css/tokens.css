@@ -1,5 +1,5 @@
 /* ==========================================================
-   Buddy design tokens · v3.0
+   Buddy design tokens · v4.0 (terracotta, navy, sage)
    Light is default. Dark applies via OS preference unless
    the page sets data-theme="light"; data-theme="dark" forces dark.
    ========================================================== */
@@ -8,40 +8,40 @@
   color-scheme: light;
 
   /* ---- Color: surfaces ---- */
-  --paper: #FBF8F3;
-  --card: #FFFDF9;
-  --mist: #E9EFF7;
-  --sand: #E7E1D8;          /* decorative lines only */
+  --paper: #FDFBF7;         /* warm off-white page */
+  --card: #FFFFFF;
+  --mist: #EDF4EF;          /* soft sage tint for quiet surfaces */
+  --sand: #E8E2D9;          /* decorative lines only */
   --stone: #857E75;         /* control boundaries (3:1+) */
 
   /* ---- Color: text ---- */
-  --ink: #16243A;
-  --driftwood: #6B6660;
+  --ink: #1E293B;           /* navy */
+  --driftwood: #5F5B55;
 
-  /* ---- Color: brand ---- */
-  --harbor: #2456A6;
-  --harbor-deep: #1A4280;
+  /* ---- Color: brand (terracotta) ---- */
+  --harbor: #B85238;        /* buttons, links, active states (4.8:1 with white) */
+  --harbor-deep: #9A4128;
   --on-harbor: #FFFFFF;
-  --sky: #A9C2E4;
+  --sky: #81B297;           /* sage, decorative */
 
   /* ---- Color: accent ---- */
-  --apricot: #E8835A;       /* decorative only, never text/indicators */
-  --apricot-tint: #F6E7DF;
-  --clay: #B4512B;
+  --apricot: #E07A5F;       /* terracotta, decorative only, never text/indicators */
+  --apricot-tint: #FBE8E1;
+  --clay: #1E293B;          /* navy accent (women-only pins, warm banners) */
   --on-clay: #FFFFFF;
 
   /* ---- Color: status ---- */
-  --moss: #2F7D5B;
-  --moss-tint: #E3F1EA;
+  --moss: #3A7557;          /* sage-green success */
+  --moss-tint: #E3EFE7;
   --brick: #B3402F;
   --brick-tint: #F8E4E0;
   --on-danger: #FFFFFF;
 
   /* ---- Overlays & shadows ---- */
-  --backdrop: rgb(16 26 42 / 0.5);
-  --shadow-1: 0 1px 2px rgb(22 36 58 / 0.06);
-  --shadow-2: 0 2px 4px rgb(22 36 58 / 0.06), 0 8px 24px rgb(22 36 58 / 0.08);
-  --shadow-3: 0 4px 8px rgb(22 36 58 / 0.08), 0 24px 48px rgb(22 36 58 / 0.14);
+  --backdrop: rgb(20 28 43 / 0.5);
+  --shadow-1: 0 1px 2px rgb(30 41 59 / 0.06);
+  --shadow-2: 0 2px 4px rgb(30 41 59 / 0.06), 0 8px 24px rgb(30 41 59 / 0.08);
+  --shadow-3: 0 4px 8px rgb(30 41 59 / 0.08), 0 24px 48px rgb(30 41 59 / 0.14);
 
   /* ---- Typography ---- */
   --font-display: 'Bricolage Grotesque Variable', 'Figtree Variable', ui-sans-serif, 'Segoe UI', sans-serif;
@@ -133,26 +133,26 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --paper: #101A2A;
-    --card: #17243A;
-    --mist: #1E3050;
-    --sand: #2A3A55;
-    --stone: #6A7B97;
-    --ink: #EEE9E1;
-    --driftwood: #A8A39B;
-    --harbor: #7FA7E0;
-    --harbor-deep: #A3C0EA;
-    --on-harbor: #101A2A;
-    --sky: #3D5A85;
-    --apricot: #F0A07E;
-    --apricot-tint: #3A2A22;
-    --clay: #F0A07E;
-    --on-clay: #101A2A;
-    --moss: #6FC29B;
-    --moss-tint: #1F3A30;
+    --paper: #141C2B;
+    --card: #1E293B;
+    --mist: #24344A;
+    --sand: #33445C;
+    --stone: #74839A;
+    --ink: #F3EFE8;
+    --driftwood: #B3ADA4;
+    --harbor: #EE9A80;
+    --harbor-deep: #F5B5A1;
+    --on-harbor: #141C2B;
+    --sky: #6E9C83;
+    --apricot: #E07A5F;
+    --apricot-tint: #3A2A24;
+    --clay: #CBD5E1;
+    --on-clay: #141C2B;
+    --moss: #8CC4A3;
+    --moss-tint: #1F3A2D;
     --brick: #F08A7A;
     --brick-tint: #3A2226;
-    --on-danger: #101A2A;
+    --on-danger: #141C2B;
     --backdrop: rgb(0 0 0 / 0.6);
     --shadow-1: none;
     --shadow-2: 0 8px 24px rgb(0 0 0 / 0.35);
@@ -163,26 +163,26 @@
 /* Dark: forced by the page */
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --paper: #101A2A;
-  --card: #17243A;
-  --mist: #1E3050;
-  --sand: #2A3A55;
-  --stone: #6A7B97;
-  --ink: #EEE9E1;
-  --driftwood: #A8A39B;
-  --harbor: #7FA7E0;
-  --harbor-deep: #A3C0EA;
-  --on-harbor: #101A2A;
-  --sky: #3D5A85;
-  --apricot: #F0A07E;
-  --apricot-tint: #3A2A22;
-  --clay: #F0A07E;
-  --on-clay: #101A2A;
-  --moss: #6FC29B;
-  --moss-tint: #1F3A30;
+  --paper: #141C2B;
+  --card: #1E293B;
+  --mist: #24344A;
+  --sand: #33445C;
+  --stone: #74839A;
+  --ink: #F3EFE8;
+  --driftwood: #B3ADA4;
+  --harbor: #EE9A80;
+  --harbor-deep: #F5B5A1;
+  --on-harbor: #141C2B;
+  --sky: #6E9C83;
+  --apricot: #E07A5F;
+  --apricot-tint: #3A2A24;
+  --clay: #CBD5E1;
+  --on-clay: #141C2B;
+  --moss: #8CC4A3;
+  --moss-tint: #1F3A2D;
   --brick: #F08A7A;
   --brick-tint: #3A2226;
-  --on-danger: #101A2A;
+  --on-danger: #141C2B;
   --backdrop: rgb(0 0 0 / 0.6);
   --shadow-1: none;
   --shadow-2: 0 8px 24px rgb(0 0 0 / 0.35);

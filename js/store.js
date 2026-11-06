@@ -82,7 +82,7 @@
       if (fresh && window.BuddyMatch) {
         const ev = this.event('e3') || this.events()[0];
         if (ev && !this.groupForEvent(ev.id)) {
-          const prefs = { size: ev.size, similarInterests: true, similarAge: true };
+          const prefs = { size: ev.size, similarInterests: true, similarAge: false };
           this.createGroup(ev, window.BuddyMatch.formGroup(this.user(), ev, this.attendees(ev), prefs), prefs);
         }
       }
@@ -144,11 +144,11 @@
       const gid = 'g' + Date.now().toString(36);
       const g = {
         id: gid, eventId: ev.id, eventTitle: ev.title, eventStart: ev.startDate.toISOString(), cat: ev.cat, place: ev.place,
-        name: `${this.catName(ev.cat)} group`, memberIds: result.members.map((m) => m.id), reasons: result.reasons,
+        name: `${this.catName(ev.cat)} Group`, memberIds: result.members.map((m) => m.id), reasons: result.reasons,
         womenOnly: result.womenOnly, prefs, createdAt: new Date().toISOString()
       };
       const intro = [
-        { from: 'buddy', text: `This group was made for "${ev.title}". You were matched by distance, age and interests. Use this chat to confirm the plan.`, at: Date.now() - 60e3 }
+        { from: 'buddy', text: `This group was made for "${ev.title}". You were matched by distance, interests and life stage. Use this chat to confirm the plan.`, at: Date.now() - 60e3 }
       ];
       const [a1, a2] = result.members;
       if (a1) intro.push({ from: a1.id, text: `Hi everyone, I'm ${a1.name}. Looking forward to this.`, at: Date.now() - 40e3 });
