@@ -6,7 +6,7 @@ Buddy matches young adults into small groups of 5 or 6 for things they already e
 
 Business 4558 · Checkpoint 2 prototype · Team: Andrew, Carina, Mert, Sheel, Pruthvish
 
-**Live site:** https://buddy-app.sheel1911.workers.dev
+**Live site:** https://buddy-app.prototype-bus4558.workers.dev
 
 ---
 
@@ -104,7 +104,7 @@ To turn on Google Maps (about 10 minutes, team Google account):
 3. **APIs & Services → Library** → enable **Maps JavaScript API** only.
 4. **Cap it:** Google Maps Platform → **Quotas** → Maps JavaScript API → *Map loads per day* → **300**. Also Billing → **Budgets & alerts** → $1 budget with email alerts.
 5. **APIs & Services → Credentials → Create credentials → API key → Edit API key:**
-   - Application restrictions → **Websites**: `https://buddy-app.sheel1911.workers.dev/*` and `http://localhost:8000/*` (add the new address too if the site URL changes).
+   - Application restrictions → **Websites**: `https://buddy-app.prototype-bus4558.workers.dev/*` and `http://localhost:8000/*` (add the new address too if the site URL changes).
    - API restrictions → **Restrict key** → Maps JavaScript API only.
 6. Paste the key into `js/config.js` → `googleMapsKey`, commit and push. This key is visible in the browser, which is normal for map keys. Steps 4 and 5 are what keep it safe.
 7. Optional: Google Maps Platform → **Map Management → Create Map ID**, and paste it into `googleMapId` (the default `DEMO_MAP_ID` is for testing).
