@@ -12,6 +12,6 @@
      own Map ID in Google Cloud → Map Management and paste it here.
    ========================================================== */
 window.BUDDY_CONFIG = {
-  googleMapsKey: '',
+  googleMapsKey: 'AIzaSyC7-gvPo5-JgtGXvzrgJDF9wyZmam0PVzk',
   googleMapId: 'DEMO_MAP_ID'
 };
